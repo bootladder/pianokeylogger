@@ -22,8 +22,9 @@ func main() {
     return
   }
   for i := range in {
-    //listen only key stroke event
-    if i.Type == keylogger.EV_KEY {
+    //listen only key stroke event, EV_KEY, type 1
+    //also, key press has value 1
+    if i.Type == keylogger.EV_KEY && i.Value == 1 {
       fmt.Printf("\n\n\n")
       fmt.Printf("i is: %d\n",i)
       fmt.Printf("i keycode is : %d\n",i.Code)
@@ -36,12 +37,13 @@ func main() {
 func Play(s string) error {
 
 	//mystrings := strings.Fields(out)
-	cmd := exec.Command("aplay", "/opt/util/sound/a1.wav")
+  wavpath := pianoMap[s]
+	cmd := exec.Command("aplay", wavpath)
 	cmd.Start()
   return nil
 }
 
-pianoMap = map[string]string{
+var pianoMap = map[string]string{
   "A":   "/opt/util/sound/a1.wav",
   "B":   "/opt/util/sound/b1.wav",
   "C":   "/opt/util/sound/c1.wav",
@@ -49,11 +51,9 @@ pianoMap = map[string]string{
   "E":   "/opt/util/sound/e1.wav",
   "F":   "/opt/util/sound/f1.wav",
   "G":   "/opt/util/sound/g1.wav",
-  "Q":   "/opt/util/sound/a1.wav",
-  "V":   "/opt/util/sound/a1.wav",
-  "S":   "/opt/util/sound/a1.wav",
-  "W":   "/opt/util/sound/a1.wav",
-  "R":   "/opt/util/sound/a1.wav",
-  "T":   "/opt/util/sound/a1.wav",
-  "X":   "/opt/util/sound/a1.wav",
+  "Q":   "/opt/util/sound/a1s.wav",
+  "V":   "/opt/util/sound/c1s.wav",
+  "S":   "/opt/util/sound/d1s.wav",
+  "R":   "/opt/util/sound/f1s.wav",
+  "T":   "/opt/util/sound/g1s.wav",
 }
