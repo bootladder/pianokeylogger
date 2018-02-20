@@ -25,18 +25,12 @@ func main() {
     //listen only key stroke event, EV_KEY, type 1
     //also, key press has value 1
     if i.Type == keylogger.EV_KEY && i.Value == 1 {
-      fmt.Printf("\n\n\n")
-      fmt.Printf("i is: %d\n",i)
-      fmt.Printf("i keycode is : %d\n",i.Code)
-      fmt.Printf("i keystring is : %s\n", i.KeyString())
       Play(i.KeyString())
     }
   }
 }
 
 func Play(s string) error {
-
-	//mystrings := strings.Fields(out)
   wavpath := pianoMap[s]
 	cmd := exec.Command("aplay", wavpath)
 	cmd.Start()
